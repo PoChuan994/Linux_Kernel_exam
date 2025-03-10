@@ -143,3 +143,34 @@ void display(Node *head)
     // printf("%d", tmp->data);
     printf("\n");
 }
+
+int main()
+{
+    node *head = NULL;
+
+    insert_tail(&head, 63);
+    insert_tail(&head, 35);
+    insert_tail(&head, 49);
+    insert_tail(&head, 15);
+    insert_tail(&head, 27);
+    insert_tail(&head, 72);
+
+    display(head);
+    bubble_sort(&head);
+    printf("List after executing bubble sort:\n");
+    display(head);
+
+    start = NULL;
+    insert_head(&head, 47);
+    insert_head(&head, 75);
+    insert_head(&head, 2)
+    insert_head(&head, 79);
+    insert_head(&head, 23);
+
+    display(head);
+    printf("List after executing merge sort");
+    head = merge_sort(head);
+    display(head);
+
+    return 0;
+}
