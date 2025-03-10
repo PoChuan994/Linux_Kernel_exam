@@ -43,6 +43,32 @@ void insert_head(node **start, int value)
     *start = new;
 }
 
+void bubble_sort(node **start)
+{
+    if (!*start || (*start)->next == *start)
+        return;
+
+    bool swapped;
+    node *ptr1, *lptr = NULL;
+
+   do {
+        swapped = false;
+        ptr1 = *start;
+
+        do {
+            if (ptr1->next != *start && ptr1->data > ptr1->next->data) {
+                int tmp = ptr1->data;
+                ptr1->data = ptr1->next->data;
+                ptr1->next = tmp;
+                swapped = true;
+            }
+            ptr1 = ptr1->next;
+        } while (ptr1->next != lptr && ptr1->next != *start)
+
+        lptr = ptr1;
+   } while (swapped) 
+}
+
 void display(node *start)
 {
     node *tmp = start;
