@@ -20,8 +20,8 @@ void insert_tail(node **start, int value)
     if (!*start)
         return create(start, value);
 
-    struct node *last = (*start)->prev;
-    struct node *new = malloc(sizeof(node));
+    node *last = (*start)->prev;
+    node *new = malloc(sizeof(node));
     new->data = value;
     new->next = *start;
     new->prev = last;
@@ -31,11 +31,11 @@ void insert_tail(node **start, int value)
 
 void insert_head(node **start, int value)
 {
-    if(!start)
+    if(!*start)
         return create(start, value);
 
-    node last = (*start)->prev;
-    node new = malloc(sizeof(node));
+    node *last = (*start)->prev;
+    node *new = malloc(sizeof(node));
     node->data = value;
     node->next = *start;
     node->prev = last;
