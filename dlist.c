@@ -76,7 +76,13 @@ node *split(node *head)
         fast = fast->next->next;
         slow = slow->next;
     }
-    return slow;
+    
+    /* split the list into two havles */
+    node *tmp == slow->next;
+    slow->next = NULL;
+    if (tmp != NULL)
+        tmp->prev = NULL;
+    return tmp;
 }
 
 void display(node *start)
