@@ -119,6 +119,17 @@ Node *merge(Node *first, Node *second)
      }
 }
 
+Node *merge_sort(Node *head)
+{
+    if (!head || !head->next)
+        return head;
+
+    Node *second = split(head);
+    first = merge_sort(head);
+    second = merge_sort(second);
+    return merge(first, second);
+}
+
 void display(Node *head)
 {
     Node *tmp = start;
