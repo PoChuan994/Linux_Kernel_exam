@@ -135,12 +135,12 @@ void display(Node *head)
     Node *tmp = head;
     printf("Traversal in forward direction \n");
     for (; tmp->next != head; tmp = tmp->next)
-        printf("%d", tmp->data);
+        printf("%d ", tmp->data);
     printf("%d", tmp->data);
-    printf("\nTraversal in reverse dircection");
+    printf("\nTraversal in reverse dircection\n");
     Node *last = head->prev;
     for (tmp = last; tmp->prev != last; tmp = tmp->prev) 
-        printf("%d", tmp->data);
+        printf("%d ", tmp->data);
     printf("%d", tmp->data);
     printf("\n");
 }
@@ -158,7 +158,7 @@ int main()
 
     display(head);
     bubble_sort(&head);
-    printf("List after executing bubble sort:\n");
+    printf("\nList after executing bubble sort:\n");
     display(head);
 
     head = NULL;
@@ -168,8 +168,9 @@ int main()
     insert_head(&head, 79);
     insert_head(&head, 23);
 
+    printf("\nNew list:\n");
     display(head);
-    printf("List after executing merge sort");
+    printf("\nList after executing merge sort\n");
     head = merge_sort(head);
     display(head);
 
