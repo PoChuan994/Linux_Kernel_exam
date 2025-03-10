@@ -49,7 +49,7 @@ void bubble_sort(Node **head)
         return;
 
     bool swapped;
-    Node *ptr1, lptr = NULL;
+    Node *ptr1;
 
    do {
         swapped = false;
@@ -65,7 +65,6 @@ void bubble_sort(Node **head)
             ptr1 = ptr1->next;
         } while (ptr1->next != lptr && ptr1->next != *head)
 
-        lptr = ptr1;
    } while (swapped) 
 }
 
