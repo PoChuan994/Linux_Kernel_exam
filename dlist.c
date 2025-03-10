@@ -85,6 +85,40 @@ Node *split(Node *head)
     return tmp;
 }
 
+/* merge two sorted doubly linked lists */
+/* 
+ * Refered from
+ * https://www.geeksforgeeks.org/merge-sort-for-doubly-linked-list/
+ */
+Node *merge(Node *first, Node *second)
+{
+    if (!first)
+        return second;
+    if (!second)
+        return first;
+
+    /* Pick the smaller value between 
+     * first and second sub-list.
+     */
+     if (first->data < second->data) {
+         /*
+          * Recursivly merge the rest of the lists and 
+          * and link the result to the current node.
+         */
+        first->next = merge(first->next, second);
+        if (first->next != NULL)
+            first->next->prev = first;
+        first->prev = NULL;
+        return first;
+     } else {
+        second->next = merge(first, second->next);
+        if (second->next != NULL)
+            second->next->prev = second;
+        second->prev = NULL;
+        return second;
+     }
+}
+
 void display(Node *head)
 {
     Node *tmp = start;
