@@ -4,52 +4,52 @@
 typedef struct node {
   int data;
   struct node *next, *prev;
-} node;
+} Node;
 
-void create(node **start, int value)
+void create(node **head, int value)
 {
-    node *new = malloc(sizeof(node));
+    Node *new = malloc(sizeof(Node));
     new->data = value;
     new->next = new->prev = new;
     *start = new;
     return;
 }
 
-void insert_tail(node **start, int value)
+void insert_tail(Node **head, int value)
 {
     if (!*start)
-        return create(start, value);
+        return create(head, value);
 
-    node *last = (*start)->prev;
-    node *new = malloc(sizeof(node));
+    Node *last = (*head)->prev;
+    Node *new = malloc(sizeof(Node));
     new->data = value;
-    new->next = *start;
+    new->next = *head;
     new->prev = last;
-    (*start)->prev = new;
+    (*head)->prev = new;
     last->next = new;
 }
 
-void insert_head(node **start, int value)
+void insert_head(Node **head, int value)
 {
-    if(!*start)
-        return create(start, value);
+    if(!*head)
+        return create(head, value);
 
-    node *last = (*start)->prev;
-    node *new = malloc(sizeof(node));
-    node->data = value;
-    node->next = *start;
-    node->prev = last;
-    (*start)->prev = last->next = new;
-    *start = new;
+    Node *last = (*head)->prev;
+    Node *new = malloc(sizeof(Node));
+    new->data = value;
+    new->next = *start;
+    new->prev = last;
+    (*head)->prev = last->next = new;
+    *head = new;
 }
 
-void bubble_sort(node **start)
+void bubble_sort(Node **head)
 {
-    if (!*start || (*start)->next == *start)
+    if (!*head || (*head)->next == *head)
         return;
 
     bool swapped;
-    node *ptr1, lptr = NULL;
+    Node *ptr1, lptr = NULL;
 
    do {
         swapped = false;
@@ -63,37 +63,37 @@ void bubble_sort(node **start)
                 swapped = true;
             }
             ptr1 = ptr1->next;
-        } while (ptr1->next != lptr && ptr1->next != *start)
+        } while (ptr1->next != lptr && ptr1->next != *head)
 
         lptr = ptr1;
    } while (swapped) 
 }
 
-node *split(node *head)
+Node *split(Node *head)
 {
-    node *fast = head, slow = head;
+    Node *fast = head, slow = head;
     while (fast->next != head && fast->next->next != head) {
         fast = fast->next->next;
         slow = slow->next;
     }
     
     /* split the list into two havles */
-    node *tmp == slow->next;
+    Node *tmp = slow->next;
     slow->next = NULL;
     if (tmp != NULL)
         tmp->prev = NULL;
     return tmp;
 }
 
-void display(node *start)
+void display(Node *head)
 {
-    node *tmp = start;
+    Node *tmp = start;
     printf("Traversal in forward direction \n");
-    for (; tmp->next != start; tmp = tmp->next)
+    for (; tmp->next != head; tmp = tmp->next)
         printf("%d", tmp->data);
     // printf("%d", tmp->data);
     printf("\nTraversal in reverse dircection");
-    node last = (*start)->prev;
+    node last = (*head)->prev;
     for (tmp = last; tmp->prev != last; tmp = tmp->prev) 
         printf("%d". tmp->data);
     // printf("%d", tmp->data);
