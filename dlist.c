@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct node {
   int data;
   struct node *next, *prev;
 } Node;
 
-void create(node **head, int value)
+void create(Node **head, int value)
 {
     Node *new = malloc(sizeof(Node));
     new->data = value;
     new->next = new->prev = new;
-    *start = new;
+    *head = new;
     return;
 }
 
 void insert_tail(Node **head, int value)
 {
-    if (!*start)
+    if (!*head)
         return create(head, value);
 
     Node *last = (*head)->prev;
@@ -37,7 +38,7 @@ void insert_head(Node **head, int value)
     Node *last = (*head)->prev;
     Node *new = malloc(sizeof(Node));
     new->data = value;
-    new->next = *start;
+    new->next = *head;
     new->prev = last;
     (*head)->prev = last->next = new;
     *head = new;
@@ -53,24 +54,24 @@ void bubble_sort(Node **head)
 
    do {
         swapped = false;
-        ptr1 = *start;
+        ptr1 = *head;
 
         do {
-            if (ptr1->next != *start && ptr1->data > ptr1->next->data) {
+            if (ptr1->next != *head && ptr1->data > ptr1->next->data) {
                 int tmp = ptr1->data;
                 ptr1->data = ptr1->next->data;
-                ptr1->next = tmp;
+                ptr1->next->data = tmp;
                 swapped = true;
             }
             ptr1 = ptr1->next;
-        } while (ptr1->next != lptr && ptr1->next != *head)
+        } while (ptr1->next != *head);
 
-   } while (swapped) 
+   } while (swapped);
 }
 
 Node *split(Node *head)
 {
-    Node *fast = head, slow = head;
+    Node *fast = head, *slow = head;
     while (fast->next != head && fast->next->next != head) {
         fast = fast->next->next;
         slow = slow->next;
@@ -124,29 +125,29 @@ Node *merge_sort(Node *head)
         return head;
 
     Node *second = split(head);
-    first = merge_sort(head);
+    head = merge_sort(head);
     second = merge_sort(second);
-    return merge(first, second);
+    return merge(head, second);
 }
 
 void display(Node *head)
 {
-    Node *tmp = start;
+    Node *tmp = head;
     printf("Traversal in forward direction \n");
     for (; tmp->next != head; tmp = tmp->next)
         printf("%d", tmp->data);
-    // printf("%d", tmp->data);
+    printf("%d", tmp->data);
     printf("\nTraversal in reverse dircection");
-    node last = (*head)->prev;
+    Node *last = head->prev;
     for (tmp = last; tmp->prev != last; tmp = tmp->prev) 
-        printf("%d". tmp->data);
-    // printf("%d", tmp->data);
+        printf("%d", tmp->data);
+    printf("%d", tmp->data);
     printf("\n");
 }
 
 int main()
 {
-    node *head = NULL;
+    Node *head = NULL;
 
     insert_tail(&head, 63);
     insert_tail(&head, 35);
@@ -160,10 +161,10 @@ int main()
     printf("List after executing bubble sort:\n");
     display(head);
 
-    start = NULL;
+    head = NULL;
     insert_head(&head, 47);
     insert_head(&head, 75);
-    insert_head(&head, 2)
+    insert_head(&head, 2);
     insert_head(&head, 79);
     insert_head(&head, 23);
 
