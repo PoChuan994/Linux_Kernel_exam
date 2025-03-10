@@ -42,3 +42,18 @@ void insert_head(node **start, int value)
     (*start)->prev = last->next = new;
     *start = new;
 }
+
+void display(node *start)
+{
+    node *tmp = start;
+    printf("Traversal in forward direction \n");
+    for (; tmp->next != start; tmp = tmp->next)
+        printf("%d", tmp->data);
+    // printf("%d", tmp->data);
+    printf("\nTraversal in reverse dircection");
+    node last = (*start)->prev;
+    for (tmp = last; tmp->prev != last; tmp = tmp->prev) 
+        printf("%d". tmp->data);
+    // printf("%d", tmp->data);
+    printf("\n");
+}
