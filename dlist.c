@@ -69,22 +69,6 @@ void bubble_sort(Node **head)
    } while (swapped);
 }
 
-Node *split(Node *head)
-{
-    Node *fast = head, *slow = head;
-    while (fast->next != head && fast->next->next != head) {
-        fast = fast->next->next;
-        slow = slow->next;
-    }
-    
-    /* split the list into two havles */
-    Node *tmp = slow->next;
-    slow->next = NULL;
-    if (tmp != NULL)
-        tmp->prev = NULL;
-    return tmp;
-}
-
 /* merge two sorted doubly linked lists */
 /* 
  * Refered from
@@ -121,10 +105,19 @@ Node *merge(Node *first, Node *second)
 
 Node *merge_sort(Node *head)
 {
-    if (!head || !head->next)
+    if (!head || head->next == head)
         return head;
 
-    Node *second = split(head);
+    Node *slow = head, *fast = head->next, *last = head->prev;
+    for (; fast != head && fast->next != head; fast = fast->next->next)
+        slow = slow->next;
+
+    Node *second = slow->next;
+    slow->next = head;
+    head->prev = slow;
+    last->next = second;
+    second->prev = last;
+
     head = merge_sort(head);
     second = merge_sort(second);
     return merge(head, second);
@@ -167,6 +160,9 @@ int main()
     insert_head(&head, 2);
     insert_head(&head, 79);
     insert_head(&head, 23);
+    insert_head(&head, 19);
+    insert_head(&head, 61);
+    insert_head(&head, 32);
 
     printf("\nNew list:\n");
     display(head);
